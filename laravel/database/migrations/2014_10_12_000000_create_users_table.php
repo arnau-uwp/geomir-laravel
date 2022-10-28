@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -32,5 +34,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        $table->dropForeign('users_role_id');
+        $table->dropColum('users_role_id');
     }
 };
