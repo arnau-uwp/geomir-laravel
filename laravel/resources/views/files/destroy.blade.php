@@ -7,9 +7,6 @@
            <div class="card">
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
-               <form method="post" action="{{ route('files.destroy', $file) }}" enctype="multipart/form-data">
-                @csrf
-                @method('DELETE')
                    <table class="table">
                        <thead>
                            <tr>
@@ -32,8 +29,7 @@
                    </table>
                    <a class="btn btn-primary" href="{{ route('files.create') }}" role="button">Add new file</a>
                    <a class="btn btn-primary" href={{ route('files.edit',$file)}} role="button">Edit file</a>
-                    <button class="btn btn-primary" type="submit"> Destroy </button>
-                </form>
+                   <a class="btn btn-primary" href="{{ route('files.destroy',$file) }}" role="button">Destroy file</a>
                </div>
            </div>
        </div>
