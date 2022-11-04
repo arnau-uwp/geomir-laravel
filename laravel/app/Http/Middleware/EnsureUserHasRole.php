@@ -15,9 +15,9 @@ class EnsureUserHasRole
     * @param  int  $role
     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
     */
-   public function handle(Request $request, Closure $next, $role)
+   public function handle(Request $request, Closure $next, ...$roles)
    {
-    if ($request->user()->role_id != $role) {
+    if (! in_array($request->user()->role_id, $roles)) {
         $url = $request->url();
         return redirect('home')
             ->with('error', "Access denied to {$url}");

@@ -4,9 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\RouteController;
+
+Route::resource('routes', RouteController::class);
 
 Route::resource('files', FileController::class)
-->middleware(['auth', 'role:2']);
+->middleware(['auth', 'role:2,3']);
 
 // ...
 Route::get('mail/test', [MailController::class, 'test']);
