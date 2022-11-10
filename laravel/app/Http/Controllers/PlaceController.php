@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Place;
+use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PlaceController extends Controller
 {
@@ -14,7 +16,9 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
+        return view("places.index", [
+            "places" => Place::all()
+        ]);
     }
 
     /**
@@ -24,7 +28,7 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        return view("places.create");
     }
 
     /**
@@ -35,7 +39,47 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar dades del formulari
+        $validatedData = $request->validate([
+            'name'        => 'required',
+            'description' => 'required',
+            'upload'      => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
+            'latitude'    => 'required',
+            'longitude'   => 'required',
+        ]);
+        
+        // Obtenir dades del formulari
+        $name        = $request->get('name');
+        $description = $request->get('description');
+        $upload      = $request->file('upload');
+        $latitude    = $request->get('latitude');
+        $longitude   = $request->get('longitude');
+
+        // Desar fitxer al disc i inserir dades a BD
+        $file = new File();
+        $fileOk = $file->diskSave($upload);
+
+        if ($fileOk) {
+            // Desar dades a BD
+            Log::debug("Saving place at DB...");
+            $place = Place::create([
+                'name'        => $name,
+                'description' => $description,
+                'file_id'     => $file->id,
+                'latitude'    => $latitude,
+                'longitude'   => $longitude,
+                'author_id'   => auth()->user()->id,
+            ]);
+            \Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route('places.show', $place)
+                ->with('success', __('Place successfully saved'));
+        } else {
+            \Log::debug("Disk storage FAILS");
+            // Patró PRG amb missatge d'error
+            return redirect()->route("places.create")
+                ->with('error', __('ERROR Uploading file'));
+        }
     }
 
     /**
@@ -46,7 +90,11 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
+        return view("places.show", [
+            'place'  => $place,
+            'file'   => $place->file,
+            'author' => $place->user,
+        ]);
     }
 
     /**
@@ -57,7 +105,11 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        //
+        return view("places.edit", [
+            'place'  => $place,
+            'file'   => $place->file,
+            'author' => $place->user,
+        ]);
     }
 
     /**
@@ -69,7 +121,40 @@ class PlaceController extends Controller
      */
     public function update(Request $request, Place $place)
     {
-        //
+        // Validar dades del formulari
+        $validatedData = $request->validate([
+            'name'        => 'required',
+            'description' => 'required',
+            'upload'      => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
+            'latitude'    => 'required',
+            'longitude'   => 'required',
+        ]);
+        
+        // Obtenir dades del formulari
+        $name        = $request->get('name');
+        $description = $request->get('description');
+        $upload      = $request->file('upload');
+        $latitude    = $request->get('latitude');
+        $longitude   = $request->get('longitude');
+
+        // Desar fitxer (opcional)
+        if (is_null($upload) || $place->file->diskSave($upload)) {
+            // Actualitzar dades a BD
+            Log::debug("Updating DB...");
+            $place->name        = $name;
+            $place->description = $description;
+            $place->latitude    = $latitude;
+            $place->longitude   = $longitude;
+            $place->save();
+            \Log::debug("DB storage OK");
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route('places.show', $place)
+                ->with('success', __('Place successfully saved'));
+        } else {
+            // Patró PRG amb missatge d'error
+            return redirect()->route("places.create")
+                ->with('error', __('ERROR Uploading file'));
+        }
     }
 
     /**
@@ -80,6 +165,12 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        //
+        // Eliminar place de BD
+        $place->delete();
+        // Eliminar fitxer associat del disc i BD
+        $place->file->diskDelete();
+        // Patró PRG amb missatge d'èxit
+        return redirect()->route("places.index")
+            ->with('success', 'Place successfully deleted');
     }
 }

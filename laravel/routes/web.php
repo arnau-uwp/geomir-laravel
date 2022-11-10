@@ -1,18 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\RouteController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\PlaceController;
 
-Route::resource('routes', RouteController::class);
-
-Route::resource('files', FileController::class)
-->middleware(['auth', 'role:2,3']);
-
-// ...
-Route::get('mail/test', [MailController::class, 'test']);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,19 +19,24 @@ Route::get('mail/test', [MailController::class, 'test']);
 */
 
 Route::get('/', function (Request $request) {
-   $message = 'Loading welcome page';
-   Log::info($message);
-   $request->session()->flash('info', $message);
-   return view('welcome');
+    $message = 'Loading welcome page';
+    Log::info($message);
+    $request->session()->flash('info', $message);
+    return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-Route::get('mail/test', [MailController::class, 'test']);
-
 Auth::routes();
+require __DIR__.'/email-verify.php';
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('mail/test', [MailController::class, 'test']);
+
+Route::resource('files', FileController::class)
+    ->middleware(['auth', 'role.any:1,2,3']);
+
+Route::resource('posts', PostController::class)
+    ->middleware(['auth', 'role.any:1,2,3']);
+
+Route::resource('places', PlaceController::class)
+    ->middleware(['auth', 'role.any:1,2,3']);
