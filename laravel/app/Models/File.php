@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 class File extends Model
 {
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\CrudTrait;
+
 
     protected $fillable = [
         'filepath',

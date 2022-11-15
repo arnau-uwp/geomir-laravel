@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class VisibilitySeeder extends Seeder
 {
     /**
@@ -14,8 +14,21 @@ class VisibilitySeeder extends Seeder
      */
     public function run()
     {
-        Visibility::create(['id' => Visibility::public, 'name' => 'public']);
-        Visibility::create(['id' => Visibility::contacts, 'name' => 'contacts']);
-        Visibility::create(['id' => Visibility::private,  'name' => 'private']);
+        // $visibilities=[
+        //     ['id' => '1', 'name' => 'public'],
+        //     ['id' => '2', 'name' => 'contacts'],
+        //     ['id' => '3', 'name' => 'private']
+        // ];
+        // DB::table('visibilities')->insert($visibilities);
+
+        DB::table('visibilities')->delete();
+
+        $users = [
+            ['id' => 1, 'name' => 'public'],
+            ['id' => 2, 'name' => 'contacts'],
+            ['id' => 3, 'name' => 'private']
+        ];
+    
+        visibilities::insert($users);
     }
 }

@@ -9,7 +9,10 @@ class Post extends Model
 {
     use \Backpack\CRUD\app\Models\Traits\CrudTrait;
     use HasFactory;
+    use \Backpack\CRUD\app\Models\Traits\HasIdentifiableAttribute;
 
+
+        
     protected $fillable = [
         'body',
         'file_id',
@@ -27,4 +30,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
+ 
 }
