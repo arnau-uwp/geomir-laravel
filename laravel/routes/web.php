@@ -32,11 +32,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('mail/test', [MailController::class, 'test']);
 
-Route::resource('files', FileController::class)
-    ->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('files', FileController::class);
 
-Route::resource('posts', PostController::class)
-    ->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('posts', PostController::class);
 
-Route::resource('places', PlaceController::class)
-    ->middleware(['auth', 'role.any:1,2,3']);
+Route::resource('places', PlaceController::class);
