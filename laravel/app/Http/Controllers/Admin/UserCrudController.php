@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\UserRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\PermissionManager\app\Http\Controllers\UserCrudController 
+as PM_UserCrudController;
+
 
 /**
  * Class UserCrudController
@@ -26,9 +29,16 @@ class UserCrudController extends CrudController
      */
     public function setup()
     {
+        parent::setup();
+
         CRUD::setModel(\App\Models\User::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/user');
         CRUD::setEntityNameStrings('user', 'users');
+        
+        if (!backpack_user()->hasRole('admin')) {
+            CRUD::denyAccess(['list','create','read','update','delete']);
+        }
+ 
     }
 
     /**

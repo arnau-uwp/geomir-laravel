@@ -1,7 +1,58 @@
 // Body
-$body-bg: #f8fafc;
+$body-bg: #5fa8d3;
+$body-color: black; 
+
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #62b6cb;
+  }
+
+  li { display: flex; }
+h2 {
+    background-color: #62b6cb;
+}
+.card-body{
+    background-color: orange;
+
+}
+.navbar{
+    color: #225d81;
+}
+.card-body{
+    color: black;
+    background-color: #62b6cb;
+    $font-size-base: 2rem;
+}
+.card .card-header{
+    background-color: #225d81;
+    border: 0px;
+}
+.card-header{
+    color: black;
+}
+
+#navbarDropdown{
+    background-color: #225d81;
+}
+
+// nav .container{
+//     background-color: #62b6cb;
+
+// }
+
+
+
+  #app nav {
+     color: red;
+ }
+nav {
+    background-color: red;
+}

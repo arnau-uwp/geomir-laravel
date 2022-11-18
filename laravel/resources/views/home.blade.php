@@ -3,7 +3,6 @@
 @section('box-title')
     {{ __('Dashboard') }}
 @endsection
-
 @section('box-content')
     @if (session('status'))
         <div class="alert alert-success" role="alert">
