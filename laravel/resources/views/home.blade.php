@@ -15,4 +15,5 @@
         <li><a href="{{ url('/posts') }}">{{ __('Posts') }}</a></li>
         <li><a href="{{ url('/places') }}">{{ __('Places') }}</a></li>
     </ul>
+
 @endsection

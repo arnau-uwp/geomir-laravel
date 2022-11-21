@@ -6,6 +6,8 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PlaceController;
+use App\Http\Controllers\LanguageController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,7 @@ use App\Http\Controllers\PlaceController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/language/{locale}', [LanguageController::class, 'language']);
 
 Route::get('/', function (Request $request) {
     $message = 'Loading welcome page';
