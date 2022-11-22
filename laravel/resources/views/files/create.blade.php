@@ -1,4 +1,5 @@
 @extends('layouts.box-app')
+@vite('resources/js/files/create.js')
 
 @section('box-title')
     {{ __('Add file') }}
