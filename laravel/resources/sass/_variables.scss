@@ -40,19 +40,31 @@ h2 {
 }
 
 #navbarDropdown{
+    background-color: #5fa8d3;
+    border: 1px solid black;
+    border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+.nav-link{
+}
+.ms-auto{
+    margin-left: 5px;
+
+
+    border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+}
+.dropdown-item{
+    background-color: #5fa8d3;
+}
+
+
+
+.bg-color {
     background-color: #225d81;
 }
 
-// nav .container{
-//     background-color: #62b6cb;
-
-// }
-
-
-
-  #app nav {
-     color: red;
- }
-nav {
-    background-color: red;
-}
