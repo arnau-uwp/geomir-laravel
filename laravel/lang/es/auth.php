@@ -15,6 +15,6 @@ return [
 
     'failed' => 'Las credenciales introducidas no son correctas.',
     'password' => 'La contraseña introducida es incorrecta.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'throttle' => 'Demasiados intentos. Porfavor vuelve a intentar en :seconds segundos.',
 
 ];
