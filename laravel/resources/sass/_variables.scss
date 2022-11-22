@@ -2,7 +2,6 @@
 $body-bg: #5fa8d3;
 $body-color: black; 
 
-
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
@@ -25,6 +24,7 @@ h2 {
 }
 .navbar{
     color: #225d81;
+    box-shadow: none;
 }
 .card-body{
     color: black;
@@ -43,28 +43,71 @@ h2 {
     background-color: #5fa8d3;
     border: 1px solid black;
     border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 .nav-link{
 }
-.ms-auto{
-    margin-left: 5px;
-
-
-    border-top-left-radius: 10px;
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-}
-.dropdown-item{
+.dropdown a{
+    margin-left: 25px;
     background-color: #5fa8d3;
+    border: none;
+    color: #225d81;
 }
+.dropdown a:hover{
+    margin-left: 25px;
+    background-color: #5fa8d3;
+    border: none;
+
+}
+.dropdown a:active{
+    margin-left: 25px;
+    background-color: #225d81;
+    border: none;
+}
+
+
+
+
+.ms-auto{
+    margin-left: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.dropdown #dropdownMenuLink , #navbarDropdown{
+    margin-left: 10px;
+    background-color: #5fa8d3;
+    color: #225d81;
+}
+.dropdown #dropdownMenuLink:hover, #navbarDropdown:hover{
+    margin-left: 10px;
+    background-color:  #225d81;
+    color: black;
+}
+li .dropdown-item{
+    background-color: #5fa8d3;
+
+}
+
+
+
 
 
 
 .bg-color {
-    background-color: #225d81;
+    background-image: linear-gradient(#225d81, #5fa8d3);
+    box-shadow: none;
 }
-
+.nav-itemleft{
+    border-right: 2px solid #225d81;
+}
+.show ul{
+    background-color: #5fa8d3;
+}
+.dropdown ul{
+    background-color: #5fa8d3;
+}
