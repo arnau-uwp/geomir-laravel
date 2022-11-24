@@ -29,6 +29,11 @@
             <input type="text" id="longitude" name="longitude" class="form-control"
                     value="1.7282036"/>
         </div>
+        <div class="form-group">            
+            <label for="visibility_id">{{ _('visibility_id') }}</label>
+            <input type="number" id="visibility_id" name="visibility_id" class="form-control"
+                    value="1"/>
+        </div>
         <button type="submit" class="btn btn-primary">{{ _('Create') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
     </form>

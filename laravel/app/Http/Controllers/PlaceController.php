@@ -46,6 +46,7 @@ class PlaceController extends Controller
             'upload'      => 'required|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'    => 'required',
             'longitude'   => 'required',
+            'visibility_id' => 'required',
         ]);
         
         // Obtenir dades del formulari
@@ -54,6 +55,7 @@ class PlaceController extends Controller
         $upload      = $request->file('upload');
         $latitude    = $request->get('latitude');
         $longitude   = $request->get('longitude');
+        $visibility_id = $request->get('visibility_id');
 
         // Desar fitxer al disc i inserir dades a BD
         $file = new File();
@@ -69,6 +71,7 @@ class PlaceController extends Controller
                 'latitude'    => $latitude,
                 'longitude'   => $longitude,
                 'author_id'   => auth()->user()->id,
+                'visibility_id' =>$visibility_id,
             ]);
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit
@@ -128,6 +131,7 @@ class PlaceController extends Controller
             'upload'      => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'    => 'required',
             'longitude'   => 'required',
+            'visibility_id' => 'visibility_id',
         ]);
         
         // Obtenir dades del formulari
@@ -136,6 +140,7 @@ class PlaceController extends Controller
         $upload      = $request->file('upload');
         $latitude    = $request->get('latitude');
         $longitude   = $request->get('longitude');
+        $visibility_id = $request->get('visibility_id');
 
         // Desar fitxer (opcional)
         if (is_null($upload) || $place->file->diskSave($upload)) {
@@ -145,6 +150,7 @@ class PlaceController extends Controller
             $place->description = $description;
             $place->latitude    = $latitude;
             $place->longitude   = $longitude;
+            $place->visibility_id = $visibility_id;
             $place->save();
             \Log::debug("DB storage OK");
             // Patró PRG amb missatge d'èxit

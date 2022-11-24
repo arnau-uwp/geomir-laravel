@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('visibility_id');
-            $table->foreign('visibility_id')->references('id')->on('visibilities')->default(1);
+            $table->unsignedBigInteger('visibility_id')->default(1);
+            $table->foreign('visibility_id')->references('id')->on('visibilities');
         });
         Schema::table('places', function (Blueprint $table) {
-            $table->unsignedBigInteger('visibility_id');
-            $table->foreign('visibility_id')->references('id')->on('visibilities')->default(1);
+            $table->unsignedBigInteger('visibility_id')->default(1);
+            $table->foreign('visibility_id')->references('id')->on('visibilities');
         });
     }
     /**
