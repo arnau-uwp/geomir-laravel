@@ -31,5 +31,9 @@ class Place extends Model
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+    public function visibility()
+    {
+        return $this->belongsTo(visibility::class, 'visibility_id');
     } 
 }
