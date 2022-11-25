@@ -1,12 +1,15 @@
+document.getElementById("upload-error").style.visibility = "hidden";
 // Load our customized validationjs library
 import Validator from '../validator'
  
 // Submit form ONLY when validation is OK
 const form = document.getElementById("create")
- 
+
+
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...
+
    // Create validation
    let data = {
        "upload": document.getElementsByName("upload")[0].value,
@@ -25,7 +28,12 @@ form.addEventListener("submit", function( event ) {
     console.log(errors)
     // Show error messages
     for(let inputName in errors) {
+        let id = inputName + "-error";
         // ...
+        var div = document.getElementById(id);
+        div.style.visibility = "visible";
+        div.innerHTML = errors[inputName];
+
     }
     // Avoid submit
     event.preventDefault()

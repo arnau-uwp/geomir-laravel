@@ -17,6 +17,7 @@ class Place extends Model
         'latitude',
         'longitude',
         'author_id',
+        'visibility_id',
     ];
 
     public function file()
@@ -31,5 +32,9 @@ class Place extends Model
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+    public function visibility()
+    {
+        return $this->belongsTo(visibility::class, 'visibility_id');
     } 
 }
