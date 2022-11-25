@@ -1,11 +1,16 @@
 // Body
 $body-bg: #5fa8d3;
-$body-color: black; 
+$body-color: black ; 
 
 // Typography
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+body {
+   background-image: url("../../public/img/blue.jpg");
+   background-attachment: fixed;
+   background-size: cover;
+}
 
 ul {
     margin: 0;
@@ -67,7 +72,9 @@ h2 {
     border: none;
 }
 
-
+.show{
+    background-color: #5fa8d3;
+}
 
 
 .ms-auto{
@@ -78,19 +85,52 @@ h2 {
     border-bottom-left-radius: 10px;
 }
 
-.dropdown #dropdownMenuLink , #navbarDropdown{
+.dropdown #dropdownMenuLink {
     margin-left: 10px;
     background-color: #5fa8d3;
     color: #225d81;
 }
-.dropdown #dropdownMenuLink:hover, #navbarDropdown:hover{
+#navbarDropdown{
+    margin-left: 0px;
+    background-color: #5fa8d3;
+    color: #225d81;
+    border: none;
+}
+.dropdown #dropdownMenuLink:hover{
     margin-left: 10px;
-    background-color:  #225d81;
+    background-color:  #5fa8d3;
     color: black;
 }
-li .dropdown-item{
-    background-color: #5fa8d3;
+.dropdown .dropdown-menu{
+    margin-left: 10px;
+    background-color:  #5fa8d3;
+    color: black;
+}
+.dropdown .dropdown-menu:hover{
+    margin-left: 10px;
+    background-color:  #5fa8d3;
+    color: black;
+}
+#navbarDropdown:hover{
+    margin-left: 0px;
+    background-color:  #5fa8d3;
+    color: black;
+    border: none;
 
+}
+li .dropdown-item{
+    background-color: transparent;
+    margin-right: 5px;
+}
+li .dropdown-item:hover{
+    background-color: transparent;
+    margin-right: 5px;
+}
+.dropdown-menu .dropdown-item{
+    background-color: none;
+}
+.dropdown{
+    margin: 0px;
 }
 
 
@@ -99,7 +139,7 @@ li .dropdown-item{
 
 
 .bg-color {
-    background-image: linear-gradient(#225d81, #5fa8d3);
+    //background-image: linear-gradient(#225d81, #5fa8d3);
     box-shadow: none;
 }
 .nav-itemleft{
@@ -110,4 +150,10 @@ li .dropdown-item{
 }
 .dropdown ul{
     background-color: #5fa8d3;
+}
+.dropdown-menu{
+    background-color: #5fa8d3;
+}
+.navbar-brand{
+    color: #ffff00;
 }
