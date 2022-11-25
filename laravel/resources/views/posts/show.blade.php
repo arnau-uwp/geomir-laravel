@@ -24,6 +24,10 @@
                 <td>{{ $post->longitude }}</td>
             </tr>
             <tr>
+                <td><strong>Visibility_id</strong></td>
+                <td>{{ $post->visibility_id }}</td>
+            </tr>
+            <tr>
                 <td><strong>Author</strong></td>
                 <td>{{ $author->name }}</td>
             </tr>

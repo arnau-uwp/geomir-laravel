@@ -15,6 +15,7 @@
                     <td scope="col">File</td>
                     <td scope="col">Lat</td>
                     <td scope="col">Lng</td>
+                    <td scope="col">visibility_id</td>
                     <td scope="col">Created</td>
                     <td scope="col">Updated</td>
                     <td scope="col"></td>
@@ -29,6 +30,7 @@
                     <td>{{ $place->file_id }}</td>
                     <td>{{ $place->latitude }}</td>
                     <td>{{ $place->longitude }}</td>
+                    <td>{{ $place->visibility_id }}</td>
                     <td>{{ $place->created_at }}</td>
                     <td>{{ $place->updated_at }}</td>
                     <td>

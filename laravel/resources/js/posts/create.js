@@ -8,13 +8,29 @@ const form = document.getElementById("create")
 form.addEventListener("submit", function( event ) {
    // Reset errors messages
    // ...
+   document.getElementById("body-error").style.visibility = "hidden";
+   document.getElementById("upload-error").style.visibility = "hidden";
+   document.getElementById("latitude-error").style.visibility = "hidden";
+   document.getElementById("longitude-error").style.visibility = "hidden";
+   document.getElementById("visibility_id-error").style.visibility = "hidden";
+   
 
    // Create validation
    let data = {
+       "body": document.getElementsByName("body")[0].value,
        "upload": document.getElementsByName("upload")[0].value,
+       "latitude": document.getElementsByName("latitude")[0].value,
+       "longitude": document.getElementsByName("longitude")[0].value,
+       "visibility_id": document.getElementsByName("visibility_id")[0].value,
+
    }
    let rules = {
+       "body": "required",
        "upload": "required",
+       "latitude": "required",
+       "longitude": "required",
+       "visibility_id": "required",
+
    }
    let validation = new Validator(data, rules)
    // Validate fields

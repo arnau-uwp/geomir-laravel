@@ -31,6 +31,11 @@
                 <input type="text" id="longitude" name="longitude" class="form-control"
                     value="{{ $place->longitude }}"/>
         </div>
+        <div class="form-group">            
+                <label for="visibility_id">{{ _('visibility_id') }}</label>
+                <input type="text" id="visibility_id" name="visibility_id" class="form-control"
+                    value="{{ $place->visibility_id }}"/>
+        </div>
         <button type="submit" class="btn btn-primary">{{ _('Update') }}</button>
         <button type="reset" class="btn btn-secondary">{{ _('Reset') }}</button>
     </form>

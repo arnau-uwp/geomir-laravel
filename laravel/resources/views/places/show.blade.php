@@ -32,6 +32,10 @@
                 <td>{{ $author->name }}</td>
             </tr>
             <tr>
+                <td><strong>Visibility_id</strong></td>
+                <td>{{ $author->visibility_id }}</td>
+            </tr>
+            <tr>
                 <td><strong>Created</strong></td>
                 <td>{{ $place->created_at }}</td>
             </tr>

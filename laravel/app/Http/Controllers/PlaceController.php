@@ -6,6 +6,7 @@ use App\Models\Place;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Auth;
 
 class PlaceController extends Controller
 {
@@ -108,11 +109,16 @@ class PlaceController extends Controller
      */
     public function edit(Place $place)
     {
-        return view("places.edit", [
-            'place'  => $place,
-            'file'   => $place->file,
-            'author' => $place->user,
-        ]);
+        if(Auth::id() == $place->author_id){
+            return view("places.edit", [
+                'place'  => $place,
+                'file'   => $place->file,
+                'author' => $place->user,
+            ]);
+        }else{
+            return abort('403');
+        }
+        
     }
 
     /**
