@@ -44,14 +44,14 @@
                         <form action="{{ route('places.unfavorite', $place) }}" method="post">
                         @csrf
                             <button>
-                                like
+                                unlike
                             </button>
                         </form>
                         @else
                             <form action="{{ route('places.favorite', $place) }}" method="post">
                             @csrf
                                 <button>
-                                    unlike
+                                    like
                                 </button>
                             </form> 
                         @endif
