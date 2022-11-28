@@ -9,7 +9,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <td scope="col">ID</td>
+                    <td scope="col">'ID'</td>
                     <td scope="col">Name</td>
                     <td scope="col">Description</td>
                     <td scope="col">File</td>
@@ -18,6 +18,7 @@
                     <td scope="col">visibility_id</td>
                     <td scope="col">Created</td>
                     <td scope="col">Updated</td>
+                    <td scope="col"></td>
                     <td scope="col"></td>
                 </tr>
             </thead>
@@ -39,22 +40,22 @@
                         <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
                     </td>
                     <td>
-                        <form action="{{ route('places.favorite', $place) }}" method="post">
+                        @if($place->authUserHasFavorite())
+                        <form action="{{ route('places.unfavorite', $place) }}" method="post">
                         @csrf
                             <button>
                                 like
                             </button>
                         </form>
-                    </td>
-                
-                    <td>
-                        <form action="{{ route('places.unfavorite', $place) }}" method="post">
-                        @csrf
-                            <button>
-                                unlike
-                            </button>
-                        </form>
-                    </td>
+                        @else
+                            <form action="{{ route('places.favorite', $place) }}" method="post">
+                            @csrf
+                                <button>
+                                    unlike
+                                </button>
+                            </form> 
+                        @endif
+                    </td>                
                 </tr>
                 @endforeach
             </tbody>

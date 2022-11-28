@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Post extends Model
 {
@@ -44,6 +45,19 @@ class Post extends Model
     return $this->belongsToMany(User::class, 'likes');
     }
 
+    public function authUserHasLike()
+    {
+        $user = auth()->user();
+        return $this->userHasLike($user);
+    }
+
+    public function userHasLike(User $user)
+    {
+        $count = DB::table('likes')
+            ->where(['user_id' => $user->id, 'post_id' => $this->id ])
+            ->count();
+        return $count > 0;
+    }
 
  
 }
