@@ -37,4 +37,9 @@ class Place extends Model
     {
         return $this->belongsTo(visibility::class, 'visibility_id');
     } 
+    public function favorited()
+    {
+    return $this->belongsToMany(User::class, 'favorites');
+    }
+
 }

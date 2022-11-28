@@ -38,6 +38,23 @@
                         <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
                         <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
                     </td>
+                    <td>
+                        <form action="{{ route('places.favorite', $place) }}" method="post">
+                        @csrf
+                            <button>
+                                like
+                            </button>
+                        </form>
+                    </td>
+                
+                    <td>
+                        <form action="{{ route('places.unfavorite', $place) }}" method="post">
+                        @csrf
+                            <button>
+                                unlike
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

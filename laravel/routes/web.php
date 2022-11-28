@@ -41,3 +41,11 @@ Route::resource('files', FileController::class)
 Route::resource('posts', PostController::class);
 
 Route::resource('places', PlaceController::class);
+
+Route::post('posts{post}/likes',[PostController::class,'like'])->name('posts.like');
+
+Route::post('posts{post}/unlikes',[PostController::class,'unlike'])->name('posts.unlike');
+
+Route::post('places{place}/favorites',[PlaceController::class,'favorite'])->name('places.favorite');
+
+Route::post('places{place}/unfavorites',[PlaceController::class,'unfavorite'])->name('places.unfavorite');

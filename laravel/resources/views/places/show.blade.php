@@ -55,6 +55,25 @@
             <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
         </form>
         <a class="btn" href="{{ route('places.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
+        @if(!$boolean)
+        <a>
+            <form action="{{ route('places.favorite', $place) }}" method="post">
+            @csrf
+                <button>
+                    like
+                </button>
+            </form>
+        </a>
+        @else
+        <a>
+        <form action="{{ route('places.unfavorite', $place) }}" method="post">
+        @csrf
+            <button>
+                unlike
+            </button>
+        </form>
+        </a>
+        @endif
     </div>
 
     <!-- Modal -->
