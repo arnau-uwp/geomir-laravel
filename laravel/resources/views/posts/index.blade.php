@@ -37,7 +37,8 @@
                         <a title="{{ _('Delete') }}" href="{{ route('posts.show', [$post, 'delete' => 1]) }}">🗑️</a>
                     </td>
                     <td>
-                        <form action="{{ route('posts.like', $post) }}" method="post">
+                        @if($post->authUserHasLike())
+                        <form action="{{ route('posts.unlike', $post) }}" method="post">
                         @csrf
                             <button>
                                 like
@@ -46,12 +47,14 @@
                     </td>
                 
                     <td>
-                        <form action="{{ route('posts.unlike', $post) }}" method="post">
+                        @else
+                        <form action="{{ route('posts.like', $post) }}" method="post">
                         @csrf
                             <button>
                                 unlike
                             </button>
                         </form>
+                        @endif
                     </td>
                 
                 </tr>

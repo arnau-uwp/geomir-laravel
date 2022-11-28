@@ -6,8 +6,8 @@ use App\Models\Place;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Auth;
-use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class PlaceController extends Controller
@@ -96,19 +96,16 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {   
-        $count = DB::table('favorites')->where(['user_id' => Auth::id(), 'place_id' => $place->id ])->count();
-
-        if($count == 1){
-            $boolean = TRUE;
-        }else{
-            $boolean = FALSE;
-        }
+        $countFavoritos = DB::table('favorites')
+            ->where([ 'place_id' => $place->id ])
+            ->count();
 
         return view("places.show", [
             'place'  => $place,
             'file'   => $place->file,
             'author' => $place->user,
-            'boolean' => $boolean,
+            'boolean' => $place->authUserHasFavorite(),
+            'countFavoritos' => $countFavoritos,
         ]);
     }
 
@@ -213,7 +210,9 @@ class PlaceController extends Controller
 
     public function unfavorite(Place $place)
     {
-        DB::table('favorites')->where(['user_id' => Auth::id(), 'place_id' => $place->id ])->delete();
+        DB::table('favorites')
+        ->where(['user_id' => Auth::id(), 'place_id' => $place->id ])
+        ->delete();
     
         return back();
     }

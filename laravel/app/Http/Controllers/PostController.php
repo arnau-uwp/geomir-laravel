@@ -6,8 +6,8 @@ use App\Models\Post;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -88,19 +88,12 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        $count = DB::table('likes')->where(['user_id' => Auth::id(), 'post_id' => $post->id ])->count();
-
-        if($count == 1){
-            $boolean = TRUE;
-        }else{
-            $boolean = FALSE;
-        }
         
         return view("posts.show", [
             'post'   => $post,
             'file'   => $post->file,
             'author' => $post->user,
-            'boolean' => $boolean,
+            'boolean' => $post->authUserHasLike(),
         ]);
     }
 
@@ -174,7 +167,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        if(Auth::id() == $place->author_id){
+        if(Auth::id() == $post->author_id){
 
             // Eliminar post de BD
             $post->delete();
