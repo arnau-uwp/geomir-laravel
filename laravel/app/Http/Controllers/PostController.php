@@ -101,11 +101,16 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("posts.edit", [
-            'post'   => $post,
-            'file'   => $post->file,
-            'author' => $post->user,
-        ]);
+        if(Auth::id() == $place->author_id){
+
+            return view("posts.edit", [
+                'post'   => $post,
+                'file'   => $post->file,
+                'author' => $post->user,
+            ]);
+        }else{
+            return abort('403');
+        }
     }
 
     /**
@@ -158,12 +163,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        // Eliminar post de BD
-        $post->delete();
-        // Eliminar fitxer associat del disc i BD
-        $post->file->diskDelete();
-        // Patró PRG amb missatge d'èxit
-        return redirect()->route("posts.index")
-            ->with('success', __('Post successfully deleted'));
+        if(Auth::id() == $place->author_id){
+
+            // Eliminar post de BD
+            $post->delete();
+            // Eliminar fitxer associat del disc i BD
+            $post->file->diskDelete();
+            // Patró PRG amb missatge d'èxit
+            return redirect()->route("posts.index")
+                ->with('success', __('Post successfully deleted'));
+        }else{
+            return abort('403');
+        }
     }
 }

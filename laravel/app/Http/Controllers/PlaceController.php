@@ -137,7 +137,7 @@ class PlaceController extends Controller
             'upload'      => 'nullable|mimes:gif,jpeg,jpg,png,mp4|max:2048',
             'latitude'    => 'required',
             'longitude'   => 'required',
-            'visibility_id' => 'visibility_id',
+            'visibility_id' => 'required',
         ]);
         
         // Obtenir dades del formulari
@@ -177,6 +177,8 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
+        if(Auth::id() == $place->author_id){
+
         // Eliminar place de BD
         $place->delete();
         // Eliminar fitxer associat del disc i BD
@@ -184,5 +186,8 @@ class PlaceController extends Controller
         // Patró PRG amb missatge d'èxit
         return redirect()->route("places.index")
             ->with('success', 'Place successfully deleted');
+        }else{
+            return abort('403');
+        }
     }
 }
