@@ -5,61 +5,60 @@
 @endsection
 
 @section('box-content')
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <td scope="col">'ID'</td>
-                    <td scope="col">Name</td>
-                    <td scope="col">Description</td>
-                    <td scope="col">File</td>
-                    <td scope="col">Lat</td>
-                    <td scope="col">Lng</td>
-                    <td scope="col">visibility_id</td>
-                    <td scope="col">Created</td>
-                    <td scope="col">Updated</td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                </tr>
-            </thead>
-            <tbody>
+
                 @foreach ($places as $place)
-                <tr>
-                    <td>{{ $place->id }}</td>
-                    <td>{{ $place->name }}</td>
-                    <td>{{ substr($place->description,0,10) . "..." }}</td>
-                    <td>{{ $place->file_id }}</td>
-                    <td>{{ $place->latitude }}</td>
-                    <td>{{ $place->longitude }}</td>
-                    <td>{{ $place->visibility_id }}</td>
-                    <td>{{ $place->created_at }}</td>
-                    <td>{{ $place->updated_at }}</td>
-                    <td>
-                        <a title="{{ _('View') }}" href="{{ route('places.show', $place) }}">👁️</a>
-                        <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
-                        <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
-                    </td>
-                    <td>
-                        @if($place->authUserHasFavorite())
+                <section class="main">
+    <div class="wrapper">
+        <div class="left-col">
+            <div class="post">
+                <div class="info">
+                    <div class="user">
+                        <div class="profile-pic"><img src="../../public/img/blue.jpg" alt=""></div>
+                        <p class="username">{{ $place->id }} {{ substr($place->body,0,10)}} {{ $place->file_id }}</p>    
+                    </div>
+                    </img src="{{ asset('storage/'.$place->file->filepath) }}"  class="options" alt="">
+                    </div>
+                    <img src="{{ asset('storage/'.$place->file->filepath) }}" class="post-image" alt="">
+                    <div class="post-content">
+                    <div class="reaction-wrapper">
+                        <img src="img/like.PNG" class="icon" alt="">
+                        <img src="img/comment.PNG" class="icon" alt="">
+                        <img src="img/send.PNG" class="icon" alt="">
+                        <img src="img/save.PNG" class="save icon" alt="">
+                    </div>
+                    <p class="likes">   
+                    @if($place->authUserHasFavorite())
                         <form action="{{ route('places.unfavorite', $place) }}" method="post">
                         @csrf
-                            <button>
+                            <button class="botonlike"> 
                                 unlike
                             </button>
                         </form>
                         @else
                             <form action="{{ route('places.favorite', $place) }}" method="post">
                             @csrf
-                                <button>
+                                <button class="botonlike"> 
                                     like
                                 </button>
                             </form> 
                         @endif
-                    </td>                
-                </tr>
+                       <a title="{{ _('View') }}" href="{{ route('places.show', $place) }}">👁️</a>
+                        <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
+                        <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>
+
+                        </p>
+                    <p class="description"><span>Nombre author</span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
+                    <p class="post-time">{{ $place->created_at }}</p>
+                </div>
+                <div class="comment-wrapper">
+                    <img src="img/smile.PNG" class="icon" alt="">
+                    <input type="text" class="comment-box" placeholder="Add a comment">
+                    <button class="comment-btn">post</button>
+                </div>
+            </div>
+
+
+
                 @endforeach
-            </tbody>
-        </table>
-    </div>
     <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">➕ {{ _('Add new place') }}</a>
 @endsection

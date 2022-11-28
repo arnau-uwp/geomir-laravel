@@ -59,7 +59,7 @@
         <a>
             <form action="{{ route('places.favorite', $place) }}" method="post">
             @csrf
-                <button>
+                <button class="botonlike">
                     like
                 </button>
             </form>
@@ -68,7 +68,7 @@
         <a>
         <form action="{{ route('places.unfavorite', $place) }}" method="post">
         @csrf
-            <button>
+            <button class="botonlike">
                 unlike
             </button>
         </form>

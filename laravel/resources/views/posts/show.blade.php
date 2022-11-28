@@ -120,7 +120,7 @@
         <a>
             <form action="{{ route('posts.like', $post) }}" method="post">
             @csrf
-                <button>
+                <button class="botonlike">
                     like
                 </button>
             </form>
@@ -129,7 +129,7 @@
         <a>
         <form action="{{ route('posts.unlike', $post) }}" method="post">
         @csrf
-            <button>
+            <button class="botonlike">
                 unlike
             </button>
         </form>
