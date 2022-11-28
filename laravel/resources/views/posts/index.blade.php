@@ -47,21 +47,26 @@
                     </div>
                     <p class="likes">   
                     <form action="{{ route('posts.like', $post) }}" method="post">
+                    @if($post->authUserHasLike())
+                        <form action="{{ route('posts.unlike', $post) }}" method="post">
                         @csrf
                             <button>
                                 like
                             </button>
                         </form>
+                        @else
+                            <form action="{{ route('posts.like', $post) }}" method="post">
+                            @csrf
+                                <button>
+                                    unlike
+                                </button>
+                            </form> 
+                        @endif
                         <a title="{{ _('View') }}" href="{{ route('posts.show', $post) }}">👁️</a>
                         <a title="{{ _('Edit') }}" href="{{ route('posts.edit', $post) }}">📝</a>
                         <a title="{{ _('Delete') }}" href="{{ route('posts.show', [$post, 'delete' => 1]) }}">🗑️</a>
                         
-                        <form action="{{ route('posts.unlike', $post) }}" method="post">
-                        @csrf
-                            <button>
-                                unlike
-                            </button>
-                        </form>        
+
                 </p>
                     <p class="description"><span>Nombre author</span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
                     <p class="post-time">{{ $post->created_at }}</p>
