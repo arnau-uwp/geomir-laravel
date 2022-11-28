@@ -46,19 +46,19 @@
                         <img src="img/save.PNG" class="save icon" alt="">
                     </div>
                     <p class="likes">   
-                    <form action="{{ route('posts.like', $post) }}" method="post">
+                   
                     @if($post->authUserHasLike())
                         <form action="{{ route('posts.unlike', $post) }}" method="post">
                         @csrf
                             <button>
-                                like
+                                unlike
                             </button>
                         </form>
                         @else
                             <form action="{{ route('posts.like', $post) }}" method="post">
                             @csrf
                                 <button>
-                                    unlike
+                                    like
                                 </button>
                             </form> 
                         @endif
