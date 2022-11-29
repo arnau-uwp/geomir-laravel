@@ -22,9 +22,9 @@
                         <a title="{{ _('Edit') }}" href="{{ route('posts.edit', $post) }}" class="options" alt="">📝</a>
                     </div>
                     <img src="{{ asset('storage/'.$post->file->filepath) }}" class="post-image" alt="">
-                        <p class="likes">   
-                            <p>{{$post->likes_count}} @include('partials.buttons-likes')</p>
-                        </p>
+                    <div>   
+                        {{$post->likes_count}} @include('partials.buttons-likes')
+                    </div>
                         <p class="description"><span>Nombre author</span> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur tenetur veritatis placeat, molestiae impedit aut provident eum quo natus molestias?</p>
                         <p class="post-time">{{ $post->created_at }}</p>
                         <a title="{{ _('Delete') }}" href="{{ route('posts.show', [$post, 'delete' => 1]) }}"><button class="comment-btn" >Delete</button></a>
@@ -34,8 +34,8 @@
     </section>
     
 @endforeach
-            </tbody>
-        </table>
+    </tbody>
+</table>
 
 
 
