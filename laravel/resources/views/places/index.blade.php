@@ -27,21 +27,7 @@
                         <img src="img/save.PNG" class="save icon" alt="">
                     </div>
                     <p class="likes">   
-                    @if($place->authUserHasFavorite())
-                        <form action="{{ route('places.unfavorite', $place) }}" method="post">
-                        @csrf
-                            <button class="botonlike"> 
-                                unlike
-                            </button>
-                        </form>
-                        @else
-                            <form action="{{ route('places.favorite', $place) }}" method="post">
-                            @csrf
-                                <button class="botonlike"> 
-                                    like
-                                </button>
-                            </form> 
-                        @endif
+                    <p>{{ $place->favorites_count }} @include('partials.buttons-favorites')</p>
                        <a title="{{ _('View') }}" href="{{ route('places.show', $place) }}">👁️</a>
                         <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}">📝</a>
                         <a title="{{ _('Delete') }}" href="{{ route('places.show', [$place, 'delete' => 1]) }}">🗑️</a>

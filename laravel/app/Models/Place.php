@@ -38,22 +38,29 @@ class Place extends Model
     {
         return $this->belongsTo(visibility::class, 'visibility_id');
     } 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
     public function favorited()
     {
-    return $this->belongsToMany(User::class, 'favorites');
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+    
+    public function favoritedByUser(User $user)
+    {
+        $count = Favorite::where([
+            ['user_id',  '=', auth()->user()->id],
+            ['place_id', '=', $this->id],
+        ])->count();
+
+        return $count > 0;
     }
 
-    public function authUserHasFavorite()
+    public function favoritedByAuthUser()
     {
         $user = auth()->user();
-        return $this->userHasFavorite($user);
-    }
-
-    public function userHasFavorite(User $user)
-    {
-        $count = DB::table('favorites')
-            ->where(['user_id' => $user->id, 'place_id' => $this->id ])
-            ->count();
-        return $count > 0;
+        return $this->favoritedByUser($user);
     }
 }

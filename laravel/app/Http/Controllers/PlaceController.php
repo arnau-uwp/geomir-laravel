@@ -19,8 +19,10 @@ class PlaceController extends Controller
      */
     public function index()
     {
+        $places = Place::withCount('favorites')->get();
+
         return view("places.index", [
-            "places" => Place::all()
+            "places" => $places
         ]);
     }
 
@@ -96,16 +98,13 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {   
-        $countFavoritos = DB::table('favorites')
-            ->where([ 'place_id' => $place->id ])
-            ->count();
+        $place->loadCount('favorites');
 
         return view("places.show", [
             'place'  => $place,
             'file'   => $place->file,
             'author' => $place->user,
-            'boolean' => $place->authUserHasFavorite(),
-            'countFavoritos' => $countFavoritos,
+            'numFavorites' => $place->favorites_count,
         ]);
     }
 
