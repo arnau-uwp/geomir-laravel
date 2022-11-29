@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\Log;
 
 class FileController extends Controller
 {
+    public function __construct()
+    {
+       $this->middleware('permission:files.list')->only('index');
+       $this->middleware('permission:files.create')->only(['create','store']);
+       $this->middleware('permission:files.read')->only('show');
+       $this->middleware('permission:files.update')->only(['edit','update']);
+       $this->middleware('permission:files.delete')->only('destroy');
+    } 
     /**
      * Display a listing of the resource.
      *

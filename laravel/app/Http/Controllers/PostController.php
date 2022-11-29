@@ -18,8 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::withCount('likes')->get();
+
         return view("posts.index", [
-            "posts" => Post::all(),
+            "posts" => $posts
         ]);
     }
 
@@ -88,13 +90,14 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        
+        $post->loadCount('likes');
+
         return view("posts.show", [
             'post'   => $post,
             'file'   => $post->file,
             'author' => $post->user,
-            'boolean' => $post->authUserHasLike(),
-        ]);
+            'numLikes' => $post->likes_count,
+                ]);
     }
 
     /**

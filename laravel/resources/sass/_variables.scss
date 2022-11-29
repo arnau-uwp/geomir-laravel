@@ -16,31 +16,51 @@ ul {
     margin: 0;
     padding: 0;
     list-style: none;
-    background-color: #62b6cb;
+    color: #000;
   }
 
   li { display: flex; }
 h2 {
     background-color: #62b6cb;
 }
-
+.btn-primary{
+    background-color: #5fa8d3;
+}
 .navbar{
     color: #225d81;
     box-shadow: none;
 }
 .card-body{
     color: black;
-    background-color: #62b6cb;
+    //background-color: #62b6cb;
+    background-image: url("../../public/img/blue2.jpg");
     $font-size-base: 2rem;
 }
+h2{
+    background-color: transparent;
+}
 .card .card-header{
-    background-color: #256d7b;
+    background-color: #5fa8d3;
     border: 0px;
+    text-align: center;
+    height: 2,5em;
 }
 .card-header{
     color: black;
 }
-
+.inimenu a {
+    background-color: transparent;
+}
+.profile{
+    width: 2em;
+    height: 2em;
+}
+.post-content{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 6em;
+}
 #navbarDropdown{
     background-color: #5fa8d3;
     border: 1px solid black;
@@ -48,8 +68,6 @@ h2 {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-}
-.nav-link{
 }
 .dropdown a{
     margin-left: 25px;
@@ -116,11 +134,11 @@ h2 {
     border: none;
 
 }
-li .dropdown-item, #navbarDropdown{
+li .dropdown-item{
     background-color: transparent;
     margin-right: 5px;
 }
-li .dropdown-item:hover, #navbarDropdown:hover{
+li .dropdown-item:hover{
     background-color: transparent;
     margin-right: 5px;
 }
@@ -209,6 +227,7 @@ ul .inimenu{
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    background-color: #5fa8d3;
 }
 
 .info .username{
@@ -329,4 +348,7 @@ ul .inimenu{
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;  
     border: none;
+}
+.inimenu a, .inimenu a:hover ,.inimenu a:visited , .inimenu a:active{
+    color: #000;
 }

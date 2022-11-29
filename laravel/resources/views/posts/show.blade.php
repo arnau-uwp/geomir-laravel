@@ -53,25 +53,7 @@
             <button id="destroy" type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">🗑️ {{ _('Delete') }}</button>
         </form>
         <a class="btn" href="{{ route('posts.index') }}" role="button">⬅️ {{ _('Back to list') }}</a>
-        @if(!$boolean)
-        <a>
-            <form action="{{ route('posts.like', $post) }}" method="post">
-            @csrf
-                <button>
-                    like
-                </button>
-            </form>
-        </a>
-        @else
-        <a>
-        <form action="{{ route('posts.unlike', $post) }}" method="post">
-        @csrf
-            <button>
-                unlike
-            </button>
-        </form>
-        </a>
-        @endif
+ 
     </div>
 
     <!-- Modal 
@@ -100,7 +82,7 @@
             <div class="post">
                 <div class="info">
                     <div class="user">
-                        <div class="profile-pic"><img src="../../public/img/blue.jpg" alt=""></div>
+                        <div class="profile-pic"><img  class="profile" src="{{ asset('storage/'.$post->file->filepath) }}" alt=""></div>
                         <p class="username">{{ $post->id }} {{ substr($post->body,0,10)  }} {{ $post->file_id }}</p>
                         <p class="username">{{ $author->name }}</p>
                     </div>
@@ -115,26 +97,11 @@
                         <img src="img/save.PNG" class="save icon" alt="">
                     </div>
                     <p class="likes">   
+                    <div class="container" style="margin-bottom:20px">
+        <p>{{ __(':number likes', ['number' => $numLikes]) }}</p>
+        @include('partials.buttons-likes')
+    </div>  
 
-                    @if(!$boolean)
-        <a>
-            <form action="{{ route('posts.like', $post) }}" method="post">
-            @csrf
-                <button class="botonlike">
-                    like
-                </button>
-            </form>
-        </a>
-        @else
-        <a>
-        <form action="{{ route('posts.unlike', $post) }}" method="post">
-        @csrf
-            <button class="botonlike">
-                unlike
-            </button>
-        </form>
-        </a>
-        @endif
 
 
 

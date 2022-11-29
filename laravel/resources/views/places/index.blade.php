@@ -16,7 +16,7 @@
                         <div class="profile-pic"><img src="../../public/img/blue.jpg" alt=""></div>
                         <p class="username">{{ $place->id }} {{ substr($place->body,0,10)}} {{ $place->file_id }}</p>    
                     </div>
-                    </img src="{{ asset('storage/'.$place->file->filepath) }}"  class="options" alt="">
+                    <a title="{{ _('Edit') }}" href="{{ route('places.edit', $place) }}" class="options" alt="">📝</a>
                     </div>
                     <img src="{{ asset('storage/'.$place->file->filepath) }}" class="post-image" alt="">
                     <div class="post-content">
@@ -57,8 +57,16 @@
                 </div>
             </div>
 
-
+            </div>
+    </div>
+</section>
 
                 @endforeach
+                </tbody>
+        </table>
+
+
+
+    </div>
     <a class="btn btn-primary" href="{{ route('places.create') }}" role="button">➕ {{ _('Add new place') }}</a>
 @endsection

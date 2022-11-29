@@ -40,23 +40,30 @@ class Post extends Model
     {
         return $this->belongsTo(visibility::class, 'visibility_id');
     }
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
     public function liked()
     {
-    return $this->belongsToMany(User::class, 'likes');
+        return $this->belongsToMany(User::class, 'likes');
+    }
+    
+    public function likedByUser(User $user)
+    {
+        $count = Like::where([
+            ['user_id',  '=', auth()->user()->id],
+            ['post_id', '=', $this->id],
+        ])->count();
+        
+        return $count > 0;
     }
 
-    public function authUserHasLike()
+    public function likedByAuthUser()
     {
         $user = auth()->user();
-        return $this->userHasLike($user);
-    }
-
-    public function userHasLike(User $user)
-    {
-        $count = DB::table('likes')
-            ->where(['user_id' => $user->id, 'post_id' => $this->id ])
-            ->count();
-        return $count > 0;
+        return $this->likedByUser($user);
     }
 
  
