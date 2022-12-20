@@ -21,9 +21,7 @@ class PlaceController extends Controller
     {
         $places = Place::withCount('favorites')->get();
 
-        return view("places.index", [
-            "places" => $places
-        ]);
+        return view("places.index");
     }
 
     /**
